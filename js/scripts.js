@@ -30,6 +30,17 @@ $(function() {
     var inputtedLastName = $("input#lastName").val();
 
     var newCustomer = new Customer(inputtedFirstName, inputtedLastName);
+
+    $(".newOrder").each(function() {
+      var inputtedsauceType = $(this).find("input.sauceType").val();
+      var inputtedcheese = $(this).find("input.cheese").val();
+      var inputtedmeatType = $(this).find("input.meatType").val();
+      var inputtedtoppings = $(this).find("input.toppings").val();
+      var newOrder = new Order(inputtedsauceType, inputtedcheese, inputtedmeatType, inputtedtoppings);
+      newOrder.order.push(newOrder);
+      });
+
+    });
   });
 });
 
