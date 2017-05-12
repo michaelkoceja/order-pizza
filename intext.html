@@ -10,6 +10,14 @@
   <body>
     <div class="container">
       <form id="pizzaOrder">
+        <div class="form-group" id="firstName">
+          <label for="">Enter your Name</label>
+          <input type="text" class="form-control" id="new-firstName">
+        </div>
+        <div class="form-group" id="lastName">
+          <label for="">Enter your Name</label>
+          <input type="text" class="form-control" id="new-lastName">
+        </div>
         <div class="form-group" id="sauceType">
           <h3>Pick a sauce</h3>
           <label><input type="checkbox" value="">Option1</label>
@@ -39,6 +47,8 @@
         </div>
         <h3>Place your order!</h3>
         <button type="submit" name="btn">Order</button>
+        <h2>Your order!</h2>
+        <p id="completeOrder"></p>
       </form>
     </div>
   </body>
