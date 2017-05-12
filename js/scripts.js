@@ -24,8 +24,12 @@ Order.prototype.newOrder = function() {
 //User Interface Logic
 $(function() {
   $("pizzaOrder").submit(function(event) {
-
     event.preventDefault();
+
+    var inputtedFirstName = $("input#firstName").val();
+    var inputtedLastName = $("input#lastName").val();
+
+    var newCustomer = new Customer(inputtedFirstName, inputtedLastName);
   });
 });
 
