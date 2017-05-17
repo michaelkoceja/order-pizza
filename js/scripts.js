@@ -1,80 +1,71 @@
 //Business Logic
-//new customer constructor
 //new order constructor
-function PizzaOrder(size, sauceType, cheese, meatType, toppings) {
-  this.size = size;
-  this.sauceType = sauceType;
-  this.cheese = cheese;
-  this.meatType = meatType;
-  this.toppings = toppings;
+function PizzaOrder(pizzaPrice) {
+  this.pizzaPrice = pizzaPrice
+  this.toppings = [];
 }
 
-function Customer(first, last) {
-  // this.firstName = first;
-  this.lastName = last;
-}
+//new customer constructor
+// function Customer(first, last) {
+//   this.firstName = first;
+//   this.lastName = last;
+// }
 
 //add to total based on selected size
-PizzaOrder.prototype.newOrder = function() {
+PizzaOrder.prototype.newOrder = function(array) {
   var total = 4;
-  if (this.size === "large") {
+  if (this.toppings === "large") {
     total += 9;
-  } else if (this.size === "medium") {
+  } else if (this.toppings === "medium") {
     total += 7;
-  } else {
+  } else
     total += 5;
-  }
  //add number of selected toppings to total
-  for(var index = 0; i < this.size.length; index++) {
+  for(var index = 0; index < this.toppings.length; index++) {
     total += 1;
   }
-  for(var index = 0; i < this.cheese.length; index++) {
-    total += 1;
-  }
-  for(var index = 0; i < this.meatType.length; index++) {
-    total += 1;
-  }
-  for(var index = 0; i < this.toppings.length; index++) {
-    total += 1;
- }
+  this.pizzaPrice = total;
+  console.log(total);
 };
 
 //show pizza order information
 PizzaOrder.prototype.showOrder = function () {
-  return "You've orded a " + this.size + " with " + this.sauceType + " sauce, " + this.cheese + ", " + this.meatType + " and " + this.toppings + ".";
+  return "You've orded a " + this.size + " with " + this.toppings + ".";
 };
 
 //new customer prototype
-Customer.prototype.fullName = function() {
-  return this.firstName + " " + this.lastName + ",";
-};
+// Customer.prototype.fullName = function() {
+//   return this.firstName + " " + this.lastName + ",";
+// };
 
 //User Interface Logic
 $(function() {
   $("#pizzaOrder").submit(function(event) {
     event.preventDefault();
 
+    // var newCustomer = new Customer(inputtedFirstName, inputtedLastName)
+    // var inputtedFirstName = $("input#firstName").val();
+    // var inputtedLastName = $("input#lastName").val();
 
-    var inputtedFirstName = $("input#firstName").val();
-    var inputtedLastName = $("input#lastName").val();
+    // var selectedSize = $("select#pizzaSize").val();
 
-    var selectedSize = $("input:radio[name=selected-size]:checked").val();
-    var selectedSauceType = $("input:checkbox[name=selected-sauce]:checked").val();
-    var selectedCheese = $("input:checkbox[name=selected-cheese]:checked").val();
-    var selectedMeatType = $("input:checkbox[name=selected-meat]:checked").val();
-    var selectedToppings = $("input:checkbox[name=selected-topping]:checked").val();
-    var selectedIngredients = [];
-    $("input:checkbox[name=selected-ingredient]:checked").each(function() {
-      selectedIngredients.push($(this).val());
-      alert(selectedSize, selectedSauceType, selectedCheese, selectedMeatType, selectedToppings);
+    var newPizza = new PizzaOrder();
+
+    var pizzaToppings = $("input:checkbox[name=selected-ingredient]:checked").each(function() {
+      newPizza.toppings.push($(this).val());
     });
 
-    var newOrder = new PizzaOrder(selectedSize, selectedSauceType, selectedCheese, selectedMeatType, selectedToppings);
-    var newCustomer = new Customer(inputtedFirstName, inputtedLastName)
+    var totalPizza = newPizza.newOrder(newPizza.newOrder);
 
+    // $("#yourOrder").text(newPizza.pizzaPrice);
+
+    console.log(pizzaToppings);
+    alert(newPizza.showOrder());
 
     $("#completeOrder").show();
-    $("#yourOrder").html(newOrder.showOrder())
+    $("#yourOrder").html(newPizza.showOrder());
+    $("#yourOrder").text(newPizza.newOrder); //Trying to display total price
+
   });
 });
 
