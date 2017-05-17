@@ -41,7 +41,7 @@ PizzaOrder.prototype.newOrder = function() {
 
 //show pizza order information
 PizzaOrder.prototype.showOrder = function () {
-  return "You've orded a " + this.size + "with " + this.sauceType + "sauce, " + this.cheese + ", " + this.meatType.join(", ") + "and " + this.toppings.join(", ") + ".";
+  return "You've orded a " + this.size + " with " + this.sauceType + " sauce, " + this.cheese + ", " + this.meatType + " and " + this.toppings + ".";
 };
 
 //new customer prototype
@@ -58,15 +58,15 @@ $(function() {
     var inputtedFirstName = $("input#firstName").val();
     var inputtedLastName = $("input#lastName").val();
 
-    var selectedSize = $("select#pizzaSize").val();
-    var selectedSauceType = $("select#sauceType").val();
-    var selectedCheese = $("select#cheese").val();
-    var selectedMeatType = $("select#meatType").val();
-    var selectedToppings = $("select#toppings").val();
+    var selectedSize = $("input:radio[name=selected-size]:checked").val();
+    var selectedSauceType = $("input:checkbox[name=selected-sauce]:checked").val();
+    var selectedCheese = $("input:checkbox[name=selected-cheese]:checked").val();
+    var selectedMeatType = $("input:checkbox[name=selected-meat]:checked").val();
+    var selectedToppings = $("input:checkbox[name=selected-topping]:checked").val();
     var selectedIngredients = [];
     $("input:checkbox[name=selected-ingredient]:checked").each(function() {
       selectedIngredients.push($(this).val());
-      console.log();
+      alert(selectedSize, selectedSauceType, selectedCheese, selectedMeatType, selectedToppings);
     });
 
     var newOrder = new PizzaOrder(selectedSize, selectedSauceType, selectedCheese, selectedMeatType, selectedToppings);
