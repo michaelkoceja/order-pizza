@@ -1,10 +1,5 @@
 //Business Logic
 //new customer constructor
-function Customer(first, last) {
-  // this.firstName = first;
-  this.lastName = last;
-}
-
 //new order constructor
 function PizzaOrder(size, sauceType, cheese, meatType, toppings) {
   this.size = size;
@@ -14,13 +9,13 @@ function PizzaOrder(size, sauceType, cheese, meatType, toppings) {
   this.toppings = toppings;
 }
 
-//new customer prototype
-Customer.prototype.fullName = function() {
-  return this.firstName + " " + this.lastName + ",";
-};
+function Customer(first, last) {
+  // this.firstName = first;
+  this.lastName = last;
+}
 
 //add to total based on selected size
-PizzaOrder.prototype.newOrder = function(array) {
+PizzaOrder.prototype.newOrder = function() {
   var total = 4;
   if (this.size === "large") {
     total += 9;
@@ -30,7 +25,7 @@ PizzaOrder.prototype.newOrder = function(array) {
     total += 5;
   }
  //add number of selected toppings to total
-  for(var index = 0; i < this.sauceType.length; index++) {
+  for(var index = 0; i < this.size.length; index++) {
     total += 1;
   }
   for(var index = 0; i < this.cheese.length; index++) {
@@ -43,9 +38,15 @@ PizzaOrder.prototype.newOrder = function(array) {
     total += 1;
  }
 };
+
 //show pizza order information
 PizzaOrder.prototype.showOrder = function () {
   return "You've orded a " + this.size + "with " + this.sauceType + "sauce, " + this.cheese + ", " + this.meatType.join(", ") + "and " + this.toppings.join(", ") + ".";
+};
+
+//new customer prototype
+Customer.prototype.fullName = function() {
+  return this.firstName + " " + this.lastName + ",";
 };
 
 //User Interface Logic
@@ -53,10 +54,9 @@ $(function() {
   $("#pizzaOrder").submit(function(event) {
     event.preventDefault();
 
-    // var inputtedFirstName = $("input#firstName").val();
-    // var inputtedLastName = $("input#lastName").val();
-    //
-    // var newCustomer = new Customer(inputtedFirstName, inputtedLastName);
+
+    var inputtedFirstName = $("input#firstName").val();
+    var inputtedLastName = $("input#lastName").val();
 
     var selectedSize = $("select#pizzaSize").val();
     var selectedSauceType = $("select#sauceType").val();
@@ -70,6 +70,7 @@ $(function() {
     });
 
     var newOrder = new PizzaOrder(selectedSize, selectedSauceType, selectedCheese, selectedMeatType, selectedToppings);
+    var newCustomer = new Customer(inputtedFirstName, inputtedLastName)
 
 
     $("#completeOrder").show();
